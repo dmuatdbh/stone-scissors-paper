@@ -1,0 +1,9 @@
+1.  Starte main()-Methode in GameServiceApplication
+2.  Ein Service startet unter localhost:8180 (Konfigurierbar unter resources/application.properties)
+3.  Ein RestController bietet folgende REST-API an:
+
+    a.) GET /players/{id} => localhost:8180/players/1
+    b.) GET /players/winner => localhost:8180/players/winner
+    c.) PATCH /players/{id}/name/{name} => localhost:8180/players/1/name/Hugo
+    d.) PATCH /players/{id}/symbol/{symbol} => localhost:8180/players/1/symbol/stone
+
