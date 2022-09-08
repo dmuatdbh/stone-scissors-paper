@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Hier wird die Rest-API definiert.
  */
 @RestController
+@CrossOrigin(origins = { "http://localhost:3000"})
 @Data
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
