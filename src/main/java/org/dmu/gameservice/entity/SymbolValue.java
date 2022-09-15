@@ -21,9 +21,9 @@ public enum SymbolValue {
         this.opponents = opponents;
     }
 
-    public static SymbolValue getSymbolValueFromId(int randomInt) {
+    public static SymbolValue getSymbolValueFromId(int id) {
         return Arrays.stream(SymbolValue.values())
-                .filter(value -> value.ordinal() == randomInt)
+                .filter(value -> value.ordinal() == id)
                 .findFirst()
                 .orElseThrow();
     }
