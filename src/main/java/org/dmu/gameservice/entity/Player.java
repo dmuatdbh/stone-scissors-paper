@@ -11,13 +11,14 @@ import lombok.Data;
 @Data
 public class Player {
 
-    public Player(int id) {
-        this.id = id;
+    public Player(PlayerType type) {
+        this.type = type;
     }
 
     private int id;
     private String name;
     private Symbol symbol;
+    private PlayerType type;
 
     @Override
     public String toString() {

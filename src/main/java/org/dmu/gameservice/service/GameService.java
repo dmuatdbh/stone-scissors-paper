@@ -1,13 +1,14 @@
 package org.dmu.gameservice.service;
 
 import org.dmu.gameservice.entity.Player;
+import org.dmu.gameservice.entity.PlayerType;
 import org.dmu.gameservice.entity.Symbol;
 import org.dmu.gameservice.entity.SymbolValue;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -17,18 +18,11 @@ import java.util.Random;
 @Service
 public class GameService {
 
-    private final static int BOT_PLAYER_ID = 1;
-    private final static int REAL_PLAYER_ID = 2;
-    private final static int NO_PLAYER_ID = 3;
     private final Random random = new Random();
     private final Collection<Player> players;
 
     public GameService() {
         players = new ArrayList<>();
-        Player botPlayer = new Player(BOT_PLAYER_ID);
-        botPlayer.setName("Bot Player");
-        Player realPlayer = new Player(REAL_PLAYER_ID);
-        players.addAll(List.of(botPlayer, realPlayer));
     }
 
     public Player getPlayer(int id) {
@@ -40,6 +34,15 @@ public class GameService {
                 .filter(player -> player.getId() == id)
                 .findFirst()
                 .orElseThrow();
+    }
+
+    public Player createPlayer(String type) {
+        PlayerType playerType = PlayerType.valueOf(type.toUpperCase());
+        Player player = new Player(playerType);
+        player.setName(Objects.equals(PlayerType.BOT, playerType)? "The Bot" : "");
+        player.setId(random.nextInt(Integer.MAX_VALUE - 1));
+        players.add(player);
+        return player;
     }
 
     public Player updatePlayerName(int id, String name) {
@@ -54,11 +57,11 @@ public class GameService {
         return player;
     }
 
-    public Player getPlayerWinner() {
-        Player botPlayer = getPlayerById(BOT_PLAYER_ID);
+    public Player getPlayerWinner(int botId, int playerId) {
+        Player botPlayer = getPlayerById(botId);
         botPlayer.setSymbol(getRandomSymbol());
-        Player realPlayer = getPlayerById(REAL_PLAYER_ID);
-        Player noPlayer = new Player(NO_PLAYER_ID);
+        Player realPlayer = getPlayerById(playerId);
+        Player noPlayer = new Player(PlayerType.NONE);
         noPlayer.setName("No Player");
         int result = botPlayer.getSymbol().compareTo(realPlayer.getSymbol());
         return switch (result) {

@@ -4,9 +4,11 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.dmu.gameservice.entity.Player;
 import org.dmu.gameservice.service.GameService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,14 +24,19 @@ public class GameController {
 
     final private GameService service;
 
+    @PutMapping("/players/{type}")
+    public Player createPlayer(@PathVariable String type) {
+        return service.createPlayer(type);
+    }
+
     @GetMapping("/players/{id}")
-    public Player getPlayer(@PathVariable() int id) {
+    public Player getPlayer(@PathVariable int id) {
         return service.getPlayer(id);
     }
 
-    @GetMapping("/players/winner")
-    public Player getPlayerWinner() {
-        return service.getPlayerWinner();
+    @GetMapping("/players/winner/{botId}/{playerId}")
+    public Player getPlayerWinner(@PathVariable int botId, @PathVariable int playerId) {
+        return service.getPlayerWinner(botId, playerId);
     }
 
     @PatchMapping("/players/{id}/name/{name}")
