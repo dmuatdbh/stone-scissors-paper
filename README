@@ -3,7 +3,8 @@
 3.  Ein RestController bietet folgende REST-API an:
 
     a.) GET /players/{id} => localhost:8180/players/1
-    b.) GET /players/winner => localhost:8180/players/winner
+    b.) GET /players/winner/{botId}/{playerId} => localhost:8180/players/winner/123/456
     c.) PATCH /players/{id}/name/{name} => localhost:8180/players/1/name/Hugo
     d.) PATCH /players/{id}/symbol/{symbol} => localhost:8180/players/1/symbol/stone
+    e.) PUT /players/{type} => localhost:8180/players/bot
 
