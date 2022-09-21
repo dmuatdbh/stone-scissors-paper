@@ -12,8 +12,9 @@ public enum SymbolValue {
 
     STONE(List.of(2, 3)),
     SCISSORS(List.of(0, 3)),
-    PAPER(List.of(1)),
-    FOUNTAIN(List.of(2));
+    PAPER(List.of(1, 4)),
+    FOUNTAIN(List.of(2, 4)),
+    MATCH(List.of(0, 1));
 
     final List<Integer> opponents;
 

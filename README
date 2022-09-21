@@ -7,4 +7,5 @@
     c.) PATCH /players/{id}/name/{name} => localhost:8180/players/1/name/Hugo
     d.) PATCH /players/{id}/symbol/{symbol} => localhost:8180/players/1/symbol/stone
     e.) PUT /players/{type} => localhost:8180/players/bot
+    f.) GET /settings/symbols => localhost:8180/settings/symbols
 
