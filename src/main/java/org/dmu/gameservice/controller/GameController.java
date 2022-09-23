@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Hier wird die Rest-API definiert.
  */
 @RestController
+@RequestMapping("players")
 @CrossOrigin(origins = { "http://localhost:3000"})
 @Data
 @RequiredArgsConstructor
@@ -24,27 +26,27 @@ public class GameController {
 
     final private GameService service;
 
-    @PutMapping("/players/{type}")
+    @PutMapping("/{type}")
     public Player createPlayer(@PathVariable String type) {
         return service.createPlayer(type);
     }
 
-    @GetMapping("/players/{id}")
+    @GetMapping("/{id}")
     public Player getPlayer(@PathVariable int id) {
         return service.getPlayer(id);
     }
 
-    @GetMapping("/players/winner/{botId}/{playerId}")
+    @GetMapping("/winner/{botId}/{playerId}")
     public Player getPlayerWinner(@PathVariable int botId, @PathVariable int playerId) {
         return service.getPlayerWinner(botId, playerId);
     }
 
-    @PatchMapping("/players/{id}/name/{name}")
+    @PatchMapping("/{id}/name/{name}")
     public Player updatePlayerName(@PathVariable int id, @PathVariable String name) {
     	return service.updatePlayerName(id, name);
     }
 
-    @PatchMapping("/players/{id}/symbol/{symbol}")
+    @PatchMapping("/{id}/symbol/{symbol}")
     public Player updatePlayerSymbol(@PathVariable int id, @PathVariable String symbol) {
     	return service.updatePlayerSymbol(id, symbol);
     }
